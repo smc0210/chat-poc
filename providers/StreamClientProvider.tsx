@@ -2,7 +2,7 @@
 
 import { ReactNode, useEffect, useState } from 'react';
 import { StreamVideo, StreamVideoClient, User } from '@stream-io/video-react-sdk';
-import { v4 as uuidv4 } from 'uuid';
+import { useUser } from '@clerk/nextjs';
 import Loader from '@/components/Loader';
 
 const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
@@ -13,32 +13,14 @@ if (!apiKey) {
 
 export const StreamClientProvider = ({ children }: { children: ReactNode }) => {
   const [videoClient, setVideoClient] = useState<StreamVideoClient | null>(null);
-  const [user, setUser] = useState<User | null>(null);
+  const { user, isLoaded } = useUser();
 
   useEffect(() => {
-    let userId = localStorage.getItem('userId');
-    if (!userId) {
-      userId = uuidv4();
-      localStorage.setItem('userId', userId);
-    }
-    const user: User = { 
-      id: userId, 
-      name: `Guest-${userId.substring(0, 8)}`,
-      image: `https://getstream.io/random_png/?id=${userId}&name=Guest`
-    };
-    setUser(user);
-  }, []);
-
-  useEffect(() => {
-    if (!user) return;
+    if (!isLoaded || !user) return;
 
     const createClient = async () => {
       try {
-        const response = await fetch('/api/stream/token', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: user.id }),
-        });
+        const response = await fetch('/api/stream/token'); // No body needed now
         if (!response.ok) {
           throw new Error('Failed to fetch stream token');
         }
@@ -46,7 +28,11 @@ export const StreamClientProvider = ({ children }: { children: ReactNode }) => {
 
         const client = new StreamVideoClient({
           apiKey,
-          user,
+          user: {
+            id: user.id,
+            name: user.username || user.id,
+            image: user.imageUrl,
+          },
           token,
         });
         setVideoClient(client);
@@ -56,10 +42,17 @@ export const StreamClientProvider = ({ children }: { children: ReactNode }) => {
     };
 
     createClient();
-  }, [user]);
+  }, [user, isLoaded]);
 
-  if (!videoClient || !user) {
+  if (!isLoaded) {
     return <Loader />;
+  }
+  
+  // If not logged in, children will be rendered inside a page that redirects to sign-in.
+  // So we don't need to show a special message here.
+  // We only render the StreamVideo when the client is ready.
+  if (!videoClient) {
+    return <>{children}</>; 
   }
 
   return <StreamVideo client={videoClient}>{children}</StreamVideo>;

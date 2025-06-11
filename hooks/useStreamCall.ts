@@ -14,9 +14,13 @@ export const useStreamCall = (id: string) => {
     const loadCall = async () => {
       setIsCallLoading(true);
       try {
-        // Attempt to get the call
         const call = client.call('default', id);
-        await call.get(); // get() creates the call on the server if it doesn't exist
+        // Using getOrCreate is more explicit for creating/getting a call.
+        await call.getOrCreate({
+          data: {
+            starts_at: new Date().toISOString(),
+          },
+        });
         setCall(call);
       } catch (error) {
         console.error('Failed to load or create call', error);

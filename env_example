@@ -4,3 +4,6 @@ NEXT_PUBLIC_STREAM_API_KEY="your_public_api_key"
 
 # IMPORTANT: The secret key must be kept secret and only used on the server.
 STREAM_SECRET_KEY="your_secret_key"
+
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+CLERK_SECRET_KEY=

@@ -1,12 +1,13 @@
+import { auth } from '@clerk/nextjs/server';
 import { StreamClient } from '@stream-io/node-sdk';
 import { NextResponse } from 'next/server';
 
-export async function POST(req: Request) {
+export async function GET() {
   try {
-    const { userId } = await req.json();
+    const { userId } = await auth();
 
     if (!userId) {
-      return NextResponse.json({ error: 'User ID is required' }, { status: 400 });
+      return NextResponse.json({ error: 'User not authenticated' }, { status: 401 });
     }
 
     const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
