@@ -1,0 +1,6 @@
+# Stream API Credentials - get these from your Stream Dashboard
+# IMPORTANT: The API key is public and will be exposed on the client-side.
+NEXT_PUBLIC_STREAM_API_KEY="your_public_api_key"
+
+# IMPORTANT: The secret key must be kept secret and only used on the server.
+STREAM_SECRET_KEY="your_secret_key"
