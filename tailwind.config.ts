@@ -67,6 +67,18 @@ const config: Config = {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        blue: {
+          1: "#0E78F9",
+        },
+        orange: {
+          1: "#FF742E",
+        },
+        purple: {
+          1: "#830EF9",
+        },
+        yellow: {
+          1: "#F9A90E",
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
@@ -116,6 +128,10 @@ const config: Config = {
         poiretOne: ['var(--font-poiret-one)'],
         robotoCondensed: ['var(--font-roboto-condensed)'],
         tulpenOne: ['var(--font-tulpen-one)'],
+      },
+      backgroundImage: {
+        "hero": "url('/icons/hero-bg.svg')",
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },

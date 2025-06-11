@@ -32,4 +32,40 @@ body {
 
 .str-video__video-placeholder {
   background: #1c1f2e;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.text-sky-1 {
+  color: #c9ddff;
+}
+
+.bg-dark-1 {
+  background-color: #1c1f2e;
+}
+
+.bg-dark-2 {
+  background-color: #161925;
+}
+
+.bg-orange-1 {
+  background-color: #ff742e;
+}
+
+.bg-blue-1 {
+  background-color: #0e78f9;
+}
+
+.bg-purple-1 {
+  background-color: #830ef9;
+}
+
+.bg-yellow-1 {
+  background-color: #f9a90e;
 } 
