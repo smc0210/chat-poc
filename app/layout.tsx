@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   title: "Flohub - Video",
   description: "Video calling app with Clerk authentication",
   icons: {
-    icon: "/icons/logo.svg", // Assuming you have a logo here
+    icon: "/icons/flohub-logo-sample.png", // Assuming you have a logo here
   },
 };
 
@@ -27,7 +27,7 @@ export default function RootLayout({
       appearance={{
         layout: {
           socialButtonsVariant: 'iconButton',
-          logoImageUrl: '/icons/logo.svg',
+          logoImageUrl: '/icons/flohub-logo-sample.png',
         },
         variables: {
           colorText: '#fff',
