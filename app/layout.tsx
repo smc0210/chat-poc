@@ -25,6 +25,10 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
+        layout: {
+          socialButtonsVariant: 'iconButton',
+          logoImageUrl: '/icons/logo.svg',
+        },
         variables: {
           colorText: '#fff',
           colorPrimary: '#0E78F9',
@@ -32,10 +36,24 @@ export default function RootLayout({
           colorInputBackground: '#252a41',
           colorInputText: '#fff',
         },
-        layout: {
-          logoImageUrl: '', // No logo
-          socialButtonsVariant: 'iconButton',
-        }
+        elements: {
+          userButtonPopoverCard: {
+            backgroundColor: '#1c1f2e',
+            color: '#fff',
+          },
+          userButtonPopoverActionButton: {
+            color: '#fff',
+            '&:hover': {
+              backgroundColor: '#252a41',
+            },
+          },
+          userButtonPopoverActionButton__icon: {
+            color: '#fff',
+          },
+          userButtonPopoverActionButton__text: {
+            color: '#fff',
+          },
+        },
       }}
     >
       <html lang="en">
